@@ -113,7 +113,7 @@ def main() -> int:
                     "roomid": msg.get("roomid"),
                     "tolist": msg.get("tolist"),
                     "content_payload": psycopg2.extras.Json(payload),
-                    "raw_data": psycopg2.extras.Json(line),
+                    "raw_data": psycopg2.extras.Json(msg),
                 }
 
                 cursor.execute(upsert_sql, row)
