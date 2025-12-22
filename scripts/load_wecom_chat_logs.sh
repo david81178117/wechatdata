@@ -13,7 +13,7 @@ if [[ -z "${DATABASE_URL:-}" && -z "${PGHOST:-}" ]]; then
   exit 1
 fi
 
-PSQL_BASE=(psql -v ON_ERROR_STOP=1)
+PSQL_BASE=(psql -v ON_ERROR_STOP=1 -q -At)
 
 if [[ -n "${DATABASE_URL:-}" ]]; then
   PSQL_BASE+=("$DATABASE_URL")
@@ -21,7 +21,7 @@ fi
 
 PSQL_BASE+=(-v jsonl_path="$JSONL_PATH")
 
-inserted_count="$("${PSQL_BASE[@]}" -Atc "\
+inserted_count="$("${PSQL_BASE[@]}" <<'SQL'
 BEGIN;
 CREATE TABLE IF NOT EXISTS wecom_chat_logs (
     msgid VARCHAR(255) PRIMARY KEY,
@@ -74,7 +74,8 @@ WITH ins AS (
 )
 SELECT COUNT(*) FROM ins;
 COMMIT;
-")"
+SQL
+)"
 
 ts="$(TZ=Asia/Shanghai date +'%Y-%m-%d %H:%M:%S %Z')"
 echo "$ts inserted_rows=$inserted_count"
