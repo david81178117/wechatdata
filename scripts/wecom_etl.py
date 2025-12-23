@@ -13,7 +13,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Load WeCom JSONL logs into PostgreSQL.")
     parser.add_argument(
         "--jsonl",
-        default=os.getenv("JSONL_PATH", "/workspaces/wechatdata/decrypted_database_ready.jsonl"),
+        default=os.getenv("JSONL_PATH", "/opt/wecom/decrypted_database_ready.jsonl"),
         help="Path to JSONL file",
     )
     parser.add_argument(

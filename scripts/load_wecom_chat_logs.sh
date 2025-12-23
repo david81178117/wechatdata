@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-JSONL_PATH="${JSONL_PATH:-/workspaces/wechatdata/decrypted_database_ready.jsonl}"
+JSONL_PATH="${JSONL_PATH:-/opt/wecom/decrypted_database_ready.jsonl}"
 
 if [[ ! -f "$JSONL_PATH" ]]; then
   echo "JSONL file not found: $JSONL_PATH" >&2
