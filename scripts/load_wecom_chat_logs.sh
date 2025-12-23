@@ -42,7 +42,7 @@ CREATE INDEX IF NOT EXISTS idx_logs_payload ON wecom_chat_logs USING gin (conten
 
 CREATE TEMP TABLE wecom_chat_logs_stage (raw_line JSONB) ON COMMIT DROP;
 
-\\copy wecom_chat_logs_stage(raw_line) FROM :'jsonl_path';
+\copy wecom_chat_logs_stage(raw_line) FROM :'jsonl_path';
 
 WITH ins AS (
   INSERT INTO wecom_chat_logs (
